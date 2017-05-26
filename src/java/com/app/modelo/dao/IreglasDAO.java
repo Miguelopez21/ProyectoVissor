@@ -4,7 +4,7 @@ import com.app.modelo.vo.IreglasVO;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IrreglasDAO<VO extends IreglasVO> {
+public interface IreglasDAO<VO extends IreglasVO> {
 
     public void insertar(VO vo) throws SQLException;
 
@@ -15,7 +15,7 @@ public interface IrreglasDAO<VO extends IreglasVO> {
     public void consultar(VO vo) throws SQLException;
 
     public List<VO> consultar() throws SQLException;
-
+    
     public VO consultar(int id) throws SQLException;
 
 }

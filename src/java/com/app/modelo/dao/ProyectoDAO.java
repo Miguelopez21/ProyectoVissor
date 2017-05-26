@@ -1,6 +1,7 @@
 package com.app.modelo.dao;
 
 import com.app.modelo.vo.ProyectoVO;
+import com.app.modelo.dto.ProyectoUsuarioDTO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProyectoDAO implements IrreglasDAO<ProyectoVO> {
+public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     Connection cnn;
 
@@ -100,7 +101,7 @@ public class ProyectoDAO implements IrreglasDAO<ProyectoVO> {
         }
         return lista;
     }
-    
+
     public List<ProyectoVO> listarProyectos(int idFichas) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectos (?)}");
@@ -118,6 +119,34 @@ public class ProyectoDAO implements IrreglasDAO<ProyectoVO> {
             lista.add(vo);
         }
         return lista;
+    }
+
+    public ProyectoUsuarioDTO usuarioProyecto(ProyectoUsuarioDTO vo) throws SQLException {
+
+        ProyectoUsuarioDTO pu = vo;
+
+        CallableStatement procedure = this.cnn.prepareCall("{ call usuarioProyecto(?,?,?,?)}");
+        int i = 1;
+        procedure.setInt(i++, pu.getUv().getIdUsuario());
+        procedure.setInt(i++, pu.getPv().getIdProyecto());
+        procedure.setDate(i++, new Date(pu.getPv().getFechaFin().getTime()));
+        procedure.setDate(i++, new Date(pu.getPv().getFechaFin().getTime()));
+        procedure.execute();
+        return vo;
+
+    }
+
+    public ProyectoUsuarioDTO usuarioEliminar(ProyectoUsuarioDTO vo) throws SQLException {
+
+        ProyectoUsuarioDTO pu = vo;
+
+        CallableStatement procedure = this.cnn.prepareCall("{ call usuarioEliminar(?,?)}");
+        int i = 1;
+        procedure.setInt(i++, pu.getUv().getIdUsuario());
+        procedure.setInt(i++, pu.getPv().getIdProyecto());
+        procedure.execute();
+        return vo;
+
     }
 
     @Override
