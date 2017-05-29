@@ -6,7 +6,7 @@ public class FichasVO implements IreglasVO {
 
     private int idFichas;
     private int idProgramaFormacion;
-    private int numero;
+    private String numero;
     private Date fechaInicio;
     private Date fechaFin;
     private boolean estado;
@@ -14,7 +14,7 @@ public class FichasVO implements IreglasVO {
     public FichasVO() {
     }
 
-    public FichasVO(int idFichas, int idProgramaFormacion, int numero, Date fechaInicio, Date fechaFin, boolean estado) {
+    public FichasVO(int idFichas, int idProgramaFormacion, String numero, Date fechaInicio, Date fechaFin, boolean estado) {
         this.idFichas = idFichas;
         this.idProgramaFormacion = idProgramaFormacion;
         this.numero = numero;
@@ -39,11 +39,11 @@ public class FichasVO implements IreglasVO {
         this.idProgramaFormacion = idProgramaFormacion;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

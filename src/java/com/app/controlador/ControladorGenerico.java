@@ -11,10 +11,10 @@ public class ControladorGenerico<DAO extends IreglasDAO, VO extends IreglasVO> {
 
     DAO dao;
 
-    public void insertar(VO vo) throws ProyectoException {
+    public void Insertar(VO vo) throws ProyectoException {
 
         try {
-            dao.insertar(vo);
+            dao.Insertar(vo);
         } catch (SQLException e) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_INSERTAR, e);
             throw excep;
@@ -22,36 +22,36 @@ public class ControladorGenerico<DAO extends IreglasDAO, VO extends IreglasVO> {
 
     }
 
-    public void modificar(VO vo) throws ProyectoException {
+    public void Modificar(VO vo) throws ProyectoException {
         try {
-            dao.modificar(vo);
+            dao.Modificar(vo);
         } catch (SQLException ex) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, ex);
             throw excep;
         }
     }
 
-    public void eliminar(VO vo) throws ProyectoException {
+    public void Eliminar(VO vo) throws ProyectoException {
         try {
-            dao.modificar(vo);
+            dao.Modificar(vo);
         } catch (SQLException ex) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, ex);
             throw excep;
         }
     }
 
-    public void consultar(VO vo) throws ProyectoException {
+    public void Consultar(VO vo) throws ProyectoException {
         try {
-            dao.consultar(vo);
+            dao.Consultar(vo);
         } catch (SQLException ex) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, ex);
             throw excep;
         }
     }
     
-     public VO consultar(int id) throws ProyectoException {
+     public VO Consultar(int id) throws ProyectoException {
         try {
-            dao.consultar(id);
+            dao.Consultar(id);
         } catch (SQLException ex) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, ex);
             throw excep;
@@ -59,9 +59,9 @@ public class ControladorGenerico<DAO extends IreglasDAO, VO extends IreglasVO> {
         return null;
     }
 
-    public List<VO> consultar() throws ProyectoException {
+    public List<VO> Consultar() throws ProyectoException {
         try {
-            return dao.consultar();
+            return dao.Consultar();
         } catch (SQLException ex) {
             ProyectoException excep = new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, ex);
             throw excep;

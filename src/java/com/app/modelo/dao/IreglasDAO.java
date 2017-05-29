@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface IreglasDAO<VO extends IreglasVO> {
 
-    public void insertar(VO vo) throws SQLException;
+    public void Insertar(VO vo) throws SQLException;
 
-    public void modificar(VO vo) throws SQLException;
+    public void Modificar(VO vo) throws SQLException;
 
-    public void eliminar(VO vo) throws SQLException;
+    public void Eliminar(VO vo) throws SQLException;
 
-    public void consultar(VO vo) throws SQLException;
+    public void Consultar(VO vo) throws SQLException;
 
-    public List<VO> consultar() throws SQLException;
+    public List<VO> Consultar() throws SQLException;
     
-    public VO consultar(int id) throws SQLException;
+    public VO Consultar(int id) throws SQLException;
 
 }

@@ -3,8 +3,10 @@ package com.app.servlets;
 import com.app.controlador.ControladorProyecto;
 import com.app.modelo.conexion.ConexionBD;
 import com.app.modelo.dto.ProyectoUsuarioDTO;
+import com.app.modelo.vo.FichasVO;
 import com.app.modelo.vo.ProyectoVO;
 import com.app.modelo.vo.UsuarioVO;
+import com.app.controlador.ControladorFichas;
 import com.app.utils.exceptions.ProyectoException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,39 +42,64 @@ public class ServletProyecto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            int idFicha = Integer.parseInt(request.getParameter("idFicha"));
-            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-            String nombreProyecto = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            String fechaInicio = request.getParameter("fechainicio");
-            SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
-            Date fecha = new Date(formato.parse(fechaInicio).getTime());
-            String fechaFin = request.getParameter("fechafin");
-            SimpleDateFormat formato1 = new SimpleDateFormat("dd/mm/yyyy");
-            Date fecha1 = new Date(formato1.parse(fechaFin).getTime());
+            int opcion = Integer.parseInt(request.getParameter("option"));
 
-            ProyectoVO vo = new ProyectoVO();
-            ProyectoUsuarioDTO vt = new ProyectoUsuarioDTO();
-            vo.setIdFichas(idFicha);
-            vt.setUv(new UsuarioVO());
-            vt.getUv().setIdUsuario(idUsuario);
-            vo.setNombreProyecto(nombreProyecto);
-            vo.setDescripcion(descripcion);
-            vo.setFechaInicio(fecha);
-            vo.setFechaFin(fecha1);
+            switch (opcion) {
+                case 1:
 
-            try {
-                Connection cnn = ConexionBD.getConexionBD();
-                ControladorProyecto control = new ControladorProyecto(cnn);
-                ProyectoVO idProyecto = control.crearProyecto(vo);
-                vt.setPv(idProyecto);
-                control.usuarioProyecto(vt);
-                ConexionBD.desconectarBD(cnn);
-            } catch (ProyectoException prex) {
-                System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
-            } catch (NamingException | SQLException ex) {
-                System.out.println("Error BD" + ex.getMessage());
+                    String obtener = request.getParameter("obtener");
+                    FichasVO vos = new FichasVO();
+                    vos.setNumero(obtener);
 
+                    try {
+                        Connection cnn = ConexionBD.getConexionBD();
+                        ControladorFichas control = new ControladorFichas(cnn);
+                        control.FiltrarFichas(vos);
+                        ConexionBD.desconectarBD(cnn);
+                    } catch (ProyectoException prex) {
+                        System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
+                    } catch (NamingException | SQLException ex) {
+                        System.out.println("Error BD" + ex.getMessage());
+                    }
+                    break;
+
+                case 2:
+                    
+                    int idFicha = Integer.parseInt(request.getParameter("idFicha"));
+                    int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    String nombreProyecto = request.getParameter("nombre");
+                    String descripcion = request.getParameter("descripcion");
+                    String fechaInicio = request.getParameter("fechainicio");
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+                    Date fecha = new Date(formato.parse(fechaInicio).getTime());
+                    String fechaFin = request.getParameter("fechafin");
+                    SimpleDateFormat formato1 = new SimpleDateFormat("dd/mm/yyyy");
+                    Date fecha1 = new Date(formato1.parse(fechaFin).getTime());
+
+                    ProyectoVO vo = new ProyectoVO();
+                    ProyectoUsuarioDTO vt = new ProyectoUsuarioDTO();
+                    vo.setIdFichas(idFicha);
+                    vt.setUv(new UsuarioVO());
+                    vt.getUv().setIdUsuario(idUsuario);
+                    vo.setNombreProyecto(nombreProyecto);
+                    vo.setDescripcion(descripcion);
+                    vo.setFechaInicio(fecha);
+                    vo.setFechaFin(fecha1);
+
+                    try {
+                        Connection cnn = ConexionBD.getConexionBD();
+                        ControladorProyecto control = new ControladorProyecto(cnn);
+                        ProyectoVO idProyecto = control.CrearProyecto(vo);
+                        vt.setPv(idProyecto);
+                        control.UsuarioProyecto(vt);
+                        ConexionBD.desconectarBD(cnn);
+                    } catch (ProyectoException prex) {
+                        System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
+                    } catch (NamingException | SQLException ex) {
+                        System.out.println("Error BD" + ex.getMessage());
+
+                    }
+                    break;
             }
 
             out.println("<!DOCTYPE html>");

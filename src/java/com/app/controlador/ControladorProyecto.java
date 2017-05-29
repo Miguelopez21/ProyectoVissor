@@ -18,10 +18,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         this.cnn = cnn;
     }
 
-    public ProyectoVO crearProyecto(ProyectoVO vo) throws ProyectoException {
+    public ProyectoVO CrearProyecto(ProyectoVO vo) throws ProyectoException {
 
         try {
-            ProyectoVO crearProyecto = dao.crearProyecto(vo);
+            ProyectoVO crearProyecto = dao.CrearProyecto(vo);
             return crearProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_INSERTAR, e);
@@ -29,10 +29,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public ProyectoVO modificarProyecto(ProyectoVO vo) throws ProyectoException {
+    public ProyectoVO ModificarProyecto(ProyectoVO vo) throws ProyectoException {
 
         try {
-            ProyectoVO modificarProyecto = dao.modificarProyecto(vo);
+            ProyectoVO modificarProyecto = dao.ModificarProyecto(vo);
             return modificarProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
@@ -40,10 +40,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public ProyectoVO eliminarProyecto(ProyectoVO vo) throws ProyectoException {
+    public ProyectoVO EliminarProyecto(ProyectoVO vo) throws ProyectoException {
 
         try {
-            ProyectoVO eliminarProyecto = dao.eliminarProyecto(vo);
+            ProyectoVO eliminarProyecto = dao.EliminarProyecto(vo);
             return eliminarProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
@@ -51,10 +51,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public ProyectoVO habilitarProyecto(ProyectoVO vo) throws ProyectoException {
+    public ProyectoVO HabilitarProyecto(ProyectoVO vo) throws ProyectoException {
 
         try {
-            ProyectoVO habilitarProyecto = dao.habilitarProyecto(vo);
+            ProyectoVO habilitarProyecto = dao.HabilitarProyecto(vo);
             return habilitarProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
@@ -62,10 +62,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public ProyectoVO evaluarProyecto(ProyectoVO vo) throws ProyectoException {
+    public ProyectoVO EvaluarProyecto(ProyectoVO vo) throws ProyectoException {
 
         try {
-            ProyectoVO evaluarProyecto = dao.evaluarProyecto(vo);
+            ProyectoVO evaluarProyecto = dao.EvaluarProyecto(vo);
             return evaluarProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
@@ -73,26 +73,26 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public List<ProyectoVO> listarProyecto(ProyectoVO vo) throws ProyectoException {
+    public List<ProyectoVO> ListarProyecto(ProyectoVO vo) throws ProyectoException {
         try {
-            return dao.listarProyecto(vo.getIdProyecto());
+            return dao.ListarProyecto(vo.getIdProyecto());
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
     }
 
-    public List<ProyectoVO> listarProyectos(ProyectoVO vo) throws ProyectoException {
+    public List<ProyectoVO> ListarProyectos(ProyectoVO vo) throws ProyectoException {
         try {
-            return dao.listarProyectos(vo.getIdFichas());
+            return dao.ListarProyectos(vo.getIdFichas());
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
     }
 
-    public ProyectoUsuarioDTO usuarioProyecto(ProyectoUsuarioDTO vo) throws ProyectoException {
+    public ProyectoUsuarioDTO UsuarioProyecto(ProyectoUsuarioDTO vo) throws ProyectoException {
 
         try {
-            ProyectoUsuarioDTO usuarioProyecto = dao.usuarioProyecto(vo);
+            ProyectoUsuarioDTO usuarioProyecto = dao.UsuarioProyecto(vo);
             return usuarioProyecto;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
@@ -100,10 +100,10 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public ProyectoUsuarioDTO usuarioEliminar(ProyectoUsuarioDTO vo) throws ProyectoException {
+    public ProyectoUsuarioDTO UsuarioEliminar(ProyectoUsuarioDTO vo) throws ProyectoException {
 
         try {
-            ProyectoUsuarioDTO usuarioEliminar = dao.usuarioEliminar(vo);
+            ProyectoUsuarioDTO usuarioEliminar = dao.UsuarioEliminar(vo);
             return usuarioEliminar;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);

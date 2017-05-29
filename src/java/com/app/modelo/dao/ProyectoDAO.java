@@ -18,7 +18,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
         this.cnn = cnn;
     }
 
-    public ProyectoVO crearProyecto(ProyectoVO vo) throws SQLException {
+    public ProyectoVO CrearProyecto(ProyectoVO vo) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call crearProyecto(?,?,?,?,?)}");
         int i = 1;
@@ -35,7 +35,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoVO modificarProyecto(ProyectoVO vo) throws SQLException {
+    public ProyectoVO ModificarProyecto(ProyectoVO vo) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call modificarProyecto(?,?,?,?,?,?)}");
         int i = 1;
@@ -50,7 +50,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoVO eliminarProyecto(ProyectoVO vo) throws SQLException {
+    public ProyectoVO EliminarProyecto(ProyectoVO vo) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call eliminarProyecto(?)}");
         int i = 1;
@@ -60,7 +60,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoVO habilitarProyecto(ProyectoVO vo) throws SQLException {
+    public ProyectoVO HabilitarProyecto(ProyectoVO vo) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call habilitarProyecto(?)}");
         int i = 1;
@@ -70,7 +70,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoVO evaluarProyecto(ProyectoVO vo) throws SQLException {
+    public ProyectoVO EvaluarProyecto(ProyectoVO vo) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call evaluarProyecto(?,?)}");
         int i = 1;
@@ -81,7 +81,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public List<ProyectoVO> listarProyecto(int idProyecto) throws SQLException {
+    public List<ProyectoVO> ListarProyecto(int idProyecto) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call listarProyecto (?)}");
         int i = 1;
@@ -102,7 +102,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
         return lista;
     }
 
-    public List<ProyectoVO> listarProyectos(int idFichas) throws SQLException {
+    public List<ProyectoVO> ListarProyectos(int idFichas) throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectos (?)}");
         int i = 1;
@@ -121,7 +121,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
         return lista;
     }
 
-    public ProyectoUsuarioDTO usuarioProyecto(ProyectoUsuarioDTO vo) throws SQLException {
+    public ProyectoUsuarioDTO UsuarioProyecto(ProyectoUsuarioDTO vo) throws SQLException {
 
         ProyectoUsuarioDTO pu = vo;
 
@@ -136,7 +136,7 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoUsuarioDTO usuarioEliminar(ProyectoUsuarioDTO vo) throws SQLException {
+    public ProyectoUsuarioDTO UsuarioEliminar(ProyectoUsuarioDTO vo) throws SQLException {
 
         ProyectoUsuarioDTO pu = vo;
 
@@ -150,32 +150,32 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
     }
 
     @Override
-    public void modificar(ProyectoVO vo) throws SQLException {
+    public void Modificar(ProyectoVO vo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void eliminar(ProyectoVO vo) throws SQLException {
+    public void Eliminar(ProyectoVO vo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void consultar(ProyectoVO vo) throws SQLException {
+    public void Consultar(ProyectoVO vo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ProyectoVO> consultar() throws SQLException {
+    public List<ProyectoVO> Consultar() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insertar(ProyectoVO vo) throws SQLException {
+    public void Insertar(ProyectoVO vo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ProyectoVO consultar(int id) throws SQLException {
+    public ProyectoVO Consultar(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
