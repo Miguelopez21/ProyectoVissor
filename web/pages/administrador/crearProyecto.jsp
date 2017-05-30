@@ -23,6 +23,9 @@
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 
+        <!--    JqueryUI    -->
+        <link href="../../resources/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
     </head>
 
     <body>
@@ -46,12 +49,14 @@
                             </a>     
                         </li>
 
-                        <li>
-                            <a href="gestionProyectos.jsp">
-                                <i class="material-icons">account_balance_wallet</i>
-                                <p>Gestion de Proyectos</p>
-                            </a> 
 
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="gestionProyectos.jsp">
+                                    <i class="material-icons">account_balance_wallet</i>
+                                    <p>Gestion de Proyectos</p>
+                                </a> 
+                            </li>
                             <ul class="nav">
                                 <li>
                                     <a href="proyectos.jsp">
@@ -78,36 +83,31 @@
                                     </a>
                                 </li>
                             </ul>
+                        </ul>
 
-                        </li>   
-
-                        <ul class="nav">
-                            <li class="active">
-                                <a href="gestionFichas.jsp">
-                                    <i class="material-icons">assignmentreturned</i>
-                                    <p>Gestion de Fichas</p>
-                                </a>
-                            </li>
+                        <li>
+                            <a href="#">
+                                <i class="material-icons">assignmentreturned</i>
+                                <p>Gestion de Fichas</p>
+                            </a>
                             <ul class="nav">
-                                <li class="active">
-                                    <a href="fichas.jsp">
+                                <li>
+                                    <a href="#">
                                         <i class="material-icons">recent_actors</i>
                                         <p>Administrar Fichas</p>
                                     </a>
                                 </li>
                             </ul>
-
-                        </ul>
+                        </li>
 
                         <li>
-                            <a href="gestionUsuarios.jsp">
+                            <a href="#">
                                 <i class="material-icons">people</i>
                                 <p>Gestion de usuarios</p>
                             </a>
-
                             <ul class="nav">
                                 <li>
-                                    <a href="funcionarios.jsp">
+                                    <a href="#">
                                         <i class="material-icons">recent_actors</i>
                                         <p>Administrar Instructores</p>
                                     </a>
@@ -116,7 +116,7 @@
 
                             <ul class="nav">
                                 <li>
-                                    <a href="aprendices.jsp">
+                                    <a href="#">
                                         <i class="material-icons">group</i>
                                         <p>Administrar Aprendices</p>
                                     </a>
@@ -128,6 +128,7 @@
             </div>
 
             <div class="main-panel">
+                
                 <nav class="navbar navbar-transparent navbar-absolute">
                     <div class="container-fluid">
                         <div class="navbar-header">
@@ -157,13 +158,52 @@
                         </div>
                     </div>
                 </nav>
+                
             </div>
         </div>
 
         <!--Contenido pagina -->
 
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header" data-background-color="purple">
+                                <h4 class="title">Menu Principal</h4>
+                            </div>
+                            <div class="card-content">
+
+                                <center><form method="post" action="CrearProyecto">
+                                        <div>
+                                            Fichas <input type="text" name="fichas" id="inputfichas"> 
+                                            <input type="submit" value="buscar" id="botonFicha"/><br>
+                                        </div>
+
+                                        <p>
+                                            Nombre Proyecto<input type="text" name="nombre" id="nombre"><br>
+                                            Descripcion <input type="text" name="descripcion" id="descripcion"><br>
+                                            fecha incio: <input type="text" id="fechainicio"><br>
+                                            fecha fin: <input type="text" id="fechafin"><br>
+                                        </p>
+
+                                        <div>
+                                            aprendices <input type="text" id="">
+                                            <input type="submit" value="Buscar"/><br>
+                                        </div>
+                                    </form>
+                                </center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer class="footer">
             <div class="container-fluid">
+
                 <p class="copyright pull-right">
                     &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
                 </p>
@@ -185,5 +225,10 @@
 
     <!-- Material Dashboard javascript methods -->
     <script src="../../resources/js/material-dashboard.js" type="text/javascript"></script>
+
+    <!-- JqueryUI -->
+    <script src="../../resources/jquery-ui/jquery-ui.js" type="text/javascript"></script>
+    <script src="../../resources/js/fechainicio.js" type="text/javascript"></script>
+    <script src="../../resources/js/fechafin.js" type="text/javascript"></script>
 
 </html>

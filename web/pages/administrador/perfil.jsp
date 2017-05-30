@@ -58,7 +58,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            
+
                             <ul class="nav">
                                 <li>
                                     <a href="reunion.jsp">
@@ -67,7 +67,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            
+
                             <ul class="nav">
                                 <li>
                                     <a href="sustentaciones.jsp">
@@ -76,7 +76,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            
+
                         </li>
 
                         <li>
@@ -107,8 +107,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            
-                             <ul class="nav">
+
+                            <ul class="nav">
                                 <li>
                                     <a href="#">
                                         <i class="material-icons">group</i>
@@ -125,53 +125,59 @@
                 <nav class="navbar navbar-transparent navbar-absolute">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Bienvenido al Sistema</a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Bienvenido al sistema</a>
                         </div>
+
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
+
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="material-icons">person</i>
+                                        <p class="hidden-lg hidden-md">Perfil</p>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="perfil.jsp">Perfil</a></li>
-                                        <li><a href="#">Cerrar Sesion </a></li>
+                                        <li><a href="#">Perfil</a></li>
+                                        <li><a href="#">Cerrar Sesion</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-
-                
-                
-                </div>
             </div>
         </div>
+    </div>
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
-                </p>
-            </div>
-        </footer>
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="copyright pull-right">
+                &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
+            </p>
+        </div>
+    </footer>
 
-    </body>
+</body>
 
-    <!--   Core JS Files   -->
-    <script src="../../resources/jquery-ui/external/jquery/jquery.js" type="text/javascript"></script>
-    <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../resources/js/material.min.js" type="text/javascript"></script>
+<!--   Core JS Files   -->
+<script src="../../resources/jquery-ui/external/jquery/jquery.js" type="text/javascript"></script>
+<script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../resources/js/material.min.js" type="text/javascript"></script>
 
-    <!--  Charts Plugin -->
-    <script src="../../resources/js/chartist.min.js" type="text/javascript"></script>
+<!--  Charts Plugin -->
+<script src="../../resources/js/chartist.min.js" type="text/javascript"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="../../resources/js/bootstrap-notify.js" type="text/javascript"></script>
+<!--  Notifications Plugin    -->
+<script src="../../resources/js/bootstrap-notify.js" type="text/javascript"></script>
 
-    <!-- Material Dashboard javascript methods -->
-    <script src="../../resources/js/material-dashboard.js" type="text/javascript"></script>
+<!-- Material Dashboard javascript methods -->
+<script src="../../resources/js/material-dashboard.js" type="text/javascript"></script>
 
 </html>
 

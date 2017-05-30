@@ -414,7 +414,7 @@ h2.title {
 
 .sidebar,
 .off-canvas-sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -621,7 +621,7 @@ h2.title {
   position: relative;
   z-index: 2;
   float: right;
-  overflow: auto;
+  overflow: visible;
   width: calc(100% - 260px);
   min-height: 100%;
   -webkit-transform: translate3d(0px, 0, 0);
@@ -3625,7 +3625,7 @@ footer .btn {
 }
 .card .card-footer .stats .material-icons {
   position: relative;
-  top: 4px;
+  top: initial;
   font-size: 16px;
 }
 .card .card-footer h6 {
@@ -3668,8 +3668,8 @@ footer .btn {
   border-top: none;
 }
 .card [data-background-color="purple"] {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
-  box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
+  background: linear-gradient(60deg, #238273, #238273);
+  box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(209, 233, 236, 0.12), 0 7px 8px -5px rgba(179, 214, 207, 0.02);
 }
 .card [data-background-color="blue"] {
   background: linear-gradient(60deg, #26c6da, #00acc1);
