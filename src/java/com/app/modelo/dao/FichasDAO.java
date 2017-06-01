@@ -1,6 +1,8 @@
 package com.app.modelo.dao;
 
+import com.app.modelo.dto.FichasProgramaDTO;
 import com.app.modelo.vo.FichasVO;
+import com.app.modelo.vo.ProgramaFormacionVO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,22 +18,24 @@ public class FichasDAO implements IreglasDAO<FichasVO> {
         this.cnn = cnn;
     }
 
-    public List<FichasVO> FiltrarFichas() throws SQLException {
+    public List<FichasProgramaDTO> FiltrarFichas(String numeros) throws SQLException {
 
-        FichasVO vo = new FichasVO();
+        FichasProgramaDTO fp = new FichasProgramaDTO();
+
         CallableStatement procedure = this.cnn.prepareCall("{ call filtrarFichas (?)}");
         int i = 1;
-        procedure.setString(i++, vo.getNumero());
+        procedure.setString(i++, numeros);
         ResultSet resultado = procedure.executeQuery();
-        List<FichasVO> lista = new ArrayList();
+        List<FichasProgramaDTO> lista = new ArrayList();
         while (resultado.next()) {
-            vo.setIdFichas(resultado.getInt("idFichas"));
-            vo.setIdProgramaFormacion(resultado.getInt("idProgramaFormacion"));
-            vo.setNumero(resultado.getString("numero"));
-            vo.setFechaInicio(resultado.getDate("fechainicio"));
-            vo.setFechaFin(resultado.getDate("fechafin"));
-            vo.setEstado(resultado.getBoolean("estado"));
-            lista.add(vo);
+            fp.setPf(new ProgramaFormacionVO());
+            fp.setFv(new FichasVO());
+            fp.getFv().setIdFichas(resultado.getInt("idFichas"));
+            fp.getPf().setPrograma(resultado.getString("programa"));
+            fp.getFv().setNumero(resultado.getString("numero"));
+            fp.getFv().setFechaInicio(resultado.getDate("fechaIncio"));
+            fp.getFv().setFechaInicio(resultado.getDate("fechaFin"));
+            lista.add(fp);
         }
         return lista;
     }

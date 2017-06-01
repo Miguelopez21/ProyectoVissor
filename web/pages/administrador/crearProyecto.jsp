@@ -20,8 +20,9 @@
         <link href="../../resources/css/estilo.css" rel="stylesheet" type="text/css"/>
 
         <!--     Fonts and icons     -->
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        <link href="../../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../resources/css/material-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../resources/css/roboto.min.css" rel="stylesheet" type="text/css"/>
 
         <!--    JqueryUI    -->
         <link href="../../resources/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -128,7 +129,7 @@
             </div>
 
             <div class="main-panel">
-                
+
                 <nav class="navbar navbar-transparent navbar-absolute">
                     <div class="container-fluid">
                         <div class="navbar-header">
@@ -158,57 +159,123 @@
                         </div>
                     </div>
                 </nav>
-                
-            </div>
-        </div>
 
-        <!--Contenido pagina -->
+                <!--Contenido pagina -->
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header" data-background-color="purple">
-                                <h4 class="title">Menu Principal</h4>
-                            </div>
-                            <div class="card-content">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">Menu Principal</h4>
+                                    </div>
+                                    <div class="card-content">
 
-                                <center><form method="post" action="CrearProyecto">
-                                        <div>
-                                            Fichas <input type="text" name="fichas" id="inputfichas"> 
-                                            <input type="submit" value="buscar" id="botonFicha"/><br>
-                                        </div>
+                                        <center>
+                                            <form method="post" action="Proyecto">
+                                                <div>
+                                                    Fichas <input type="text" name="fichas" id="inputfichas"> 
+                                                    <input type="submit" value="buscar" id="botonFicha"/>
+                                                    <br><br>
+                                                    <div class="col-md-12">
+                                                        <div class="card">
+                                                            <div class="card-header" data-background-color="purple">
+                                                                <h4 class="title">Fichas de Formacion</h4>
 
-                                        <p>
-                                            Nombre Proyecto<input type="text" name="nombre" id="nombre"><br>
-                                            Descripcion <input type="text" name="descripcion" id="descripcion"><br>
-                                            fecha incio: <input type="text" id="fechainicio"><br>
-                                            fecha fin: <input type="text" id="fechafin"><br>
-                                        </p>
+                                                            </div>
+                                                            <div class="card-content table-responsive">
+                                                                <table class="table">
+                                                                    <thead class="text-primary">
+                                                                    <th>Programa de Formacion</th>
+                                                                    <th>Ficha</th>
+                                                                    <th>Fecha de Incio</th>
+                                                                    <th>Fecha de Terminacion</th>                                                                    
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td><input type="submit" value="Eliminar"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
 
-                                        <div>
-                                            aprendices <input type="text" id="">
-                                            <input type="submit" value="Buscar"/><br>
-                                        </div>
-                                    </form>
-                                </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+
+                                                <p>
+                                                    Nombre Proyecto<input type="text" name="nombre" id="nombre"><br>
+                                                    Descripcion <input type="text" name="descripcion" id="descripcion"><br>
+                                                    fecha incio: <input type="text" id="fechainicio"><br>
+                                                    fecha fin: <input type="text" id="fechafin"><br>
+                                                </p>
+
+                                                <br>
+
+                                                <div>
+                                                    aprendices <input type="text" id="">
+                                                    <input type="submit" value="Buscar"/>
+                                                    <br>
+                                                </div>
+                                                <br>
+
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header" data-background-color="purple">
+                                                            <h4 class="title">Aprendices en Formacion</h4>
+
+                                                        </div>
+                                                        <div class="card-content table-responsive">
+                                                            <table class="table">
+                                                                <thead class="text-primary">
+                                                                <th>Programa de Formacion</th>
+                                                                <th>Ficha</th>
+                                                                <th>Fecha de Incio</th>
+                                                                <th>Fecha de Terminacion</th>                                                                    
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td><input type="submit" value="Eliminar"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </center>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+
+                        <p class="copyright pull-right">
+                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
+                        </p>
+                    </div>
+                </footer>
+
             </div>
         </div>
 
-        <footer class="footer">
-            <div class="container-fluid">
-
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
-                </p>
-            </div>
-        </footer>
 
     </body>
 

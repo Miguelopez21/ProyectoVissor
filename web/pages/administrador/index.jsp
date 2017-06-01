@@ -22,10 +22,11 @@
         <link href="../../resources/css/material-dashboard.css" rel="stylesheet" type="text/css"/>
         <link href="../../resources/css/estilo.css" rel="stylesheet" type="text/css"/>
 
-        <!--     Fonts and icons     -->
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
+       <!--     Fonts and icons     -->
+        <link href="../../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../resources/css/material-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../resources/css/roboto.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
 
     <body>

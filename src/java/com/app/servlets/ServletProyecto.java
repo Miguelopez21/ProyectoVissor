@@ -7,7 +7,9 @@ import com.app.modelo.vo.FichasVO;
 import com.app.modelo.vo.ProyectoVO;
 import com.app.modelo.vo.UsuarioVO;
 import com.app.controlador.ControladorFichas;
+import com.app.modelo.dto.FichasProgramaDTO;
 import com.app.utils.exceptions.ProyectoException;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,6 +17,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -40,22 +43,27 @@ public class ServletProyecto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
 
             int opcion = Integer.parseInt(request.getParameter("option"));
 
             switch (opcion) {
+                
                 case 1:
 
                     String obtener = request.getParameter("obtener");
-                    FichasVO vos = new FichasVO();
-                    vos.setNumero(obtener);
+                    FichasProgramaDTO fp = new FichasProgramaDTO();
+                    fp.setFv(new FichasVO());
+                    fp.getFv().setNumero(obtener);
 
                     try {
                         Connection cnn = ConexionBD.getConexionBD();
                         ControladorFichas control = new ControladorFichas(cnn);
-                        control.FiltrarFichas(vos);
+                        List<FichasProgramaDTO> lista = control.FiltrarFichas(fp);
                         ConexionBD.desconectarBD(cnn);
+                        String jSonlista = new Gson().toJson(lista);
+                        out.print(jSonlista);
                     } catch (ProyectoException prex) {
                         System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
                     } catch (NamingException | SQLException ex) {
