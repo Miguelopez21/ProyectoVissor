@@ -2,6 +2,7 @@ package com.app.modelo.dao;
 
 import com.app.modelo.vo.ProyectoVO;
 import com.app.modelo.dto.ProyectoUsuarioDTO;
+import com.app.modelo.vo.UsuarioVO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,9 +21,8 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     public ProyectoVO CrearProyecto(ProyectoVO vo) throws SQLException {
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call crearProyecto(?,?,?,?,?)}");
+        CallableStatement procedure = this.cnn.prepareCall("{ call crearProyecto(?,?,?,?)}");
         int i = 1;
-        procedure.setInt(i++, vo.getIdFichas());
         procedure.setString(i++, vo.getNombreProyecto());
         procedure.setString(i++, vo.getDescripcion());
         procedure.setDate(i++, new Date(vo.getFechaInicio().getTime()));
@@ -30,6 +30,8 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
         ResultSet resultado = procedure.executeQuery();
         if (resultado.next()) {
             vo.setIdProyecto(resultado.getInt("idProyecto"));
+            vo.setFechaInicio(resultado.getDate("fechaIncio"));
+            vo.setFechaFin(resultado.getDate("fechaFin"));
         }
         return vo;
 
@@ -39,15 +41,14 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call modificarProyecto(?,?,?,?,?,?)}");
         int i = 1;
-        procedure.setInt(i++, vo.getIdProyecto());
-        procedure.setInt(i++, vo.getIdFichas());
         procedure.setString(i++, vo.getNombreProyecto());
         procedure.setString(i++, vo.getDescripcion());
         procedure.setDate(i++, new Date(vo.getFechaInicio().getTime()));
         procedure.setDate(i++, new Date(vo.getFechaFin().getTime()));
+        procedure.setInt(i++, vo.getPorcentaje());
+        procedure.setInt(i++, vo.getIdProyecto());
         procedure.execute();
         return vo;
-
     }
 
     public ProyectoVO EliminarProyecto(ProyectoVO vo) throws SQLException {
@@ -81,42 +82,52 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public List<ProyectoVO> ListarProyecto(int idProyecto) throws SQLException {
+    public List<ProyectoUsuarioDTO> ListarProyecto(int idProyecto, int idFichas) throws SQLException {
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyecto (?)}");
+        ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
+
+        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyecto (?,?)}");
         int i = 1;
         procedure.setInt(i++, idProyecto);
+        procedure.setInt(i++, idFichas);
         ResultSet resultado = procedure.executeQuery();
-        List<ProyectoVO> lista = new ArrayList();
+        List<ProyectoUsuarioDTO> lista = new ArrayList();
         while (resultado.next()) {
-            ProyectoVO vo = new ProyectoVO();
-            vo.setIdProyecto(resultado.getInt("idProyecto"));
-            vo.setIdFichas(resultado.getInt("idFichas"));
-            vo.setNombreProyecto(resultado.getString("nombreProyecto"));
-            vo.setDescripcion(resultado.getString("descripcion"));
-            vo.setFechaInicio(resultado.getDate("fechaInicio"));
-            vo.setFechaFin(resultado.getDate("fechaFin"));
-            vo.setEstado(resultado.getBoolean("estado"));
-            lista.add(vo);
+            pu.setPv(new ProyectoVO());
+            pu.getPv().setIdProyecto(resultado.getInt("idProyecto"));
+            pu.getPv().setNombreProyecto(resultado.getString("nombreProyecto"));
+            pu.getPv().setFechaInicio(resultado.getDate("fechaInicio"));
+            pu.getPv().setFechaFin(resultado.getDate("fechaFin"));
+            pu.getPv().setPorcentaje(resultado.getInt("porcentaje"));
+            lista.add(pu);
         }
         return lista;
     }
 
-    public List<ProyectoVO> ListarProyectos(int idFichas) throws SQLException {
+    public List<ProyectoUsuarioDTO> listarProyectoCreado(int idProyecto) throws SQLException {
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectos (?)}");
+        ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
+
+        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectoCreado (?)}");
         int i = 1;
-        procedure.setInt(i++, idFichas);
+        procedure.setInt(i++, idProyecto);
         ResultSet resultado = procedure.executeQuery();
-        List<ProyectoVO> lista = new ArrayList();
+        List<ProyectoUsuarioDTO> lista = new ArrayList();
         while (resultado.next()) {
-            ProyectoVO vo = new ProyectoVO();
-            vo.setIdProyecto(resultado.getInt("idProyecto"));
-            vo.setNombreProyecto(resultado.getString("nombreProyecto"));
-            vo.setFechaInicio(resultado.getDate("fechaInicio"));
-            vo.setFechaFin(resultado.getDate("fechaFin"));
-            vo.setEstado(resultado.getBoolean("estado"));
-            lista.add(vo);
+            pu.setPv(new ProyectoVO());
+            pu.setUv(new UsuarioVO());
+            pu.getPv().setIdProyecto(resultado.getInt("idProyecto"));
+            pu.getPv().setNombreProyecto(resultado.getString("nombreProyecto"));
+            pu.getPv().setDescripcion(resultado.getString("descripcion"));
+            pu.getPv().setFechaInicio(resultado.getDate("fechaInicio"));
+            pu.getPv().setFechaFin(resultado.getDate("fechaFin"));
+            pu.getPv().setPorcentaje(resultado.getInt("porcentaje"));
+            pu.getPv().setEstado(resultado.getBoolean("estado"));
+            pu.getUv().setIdUsuario(resultado.getInt("idUsuario"));
+            pu.getUv().setNumeroIdentificacion(resultado.getString("numeroIdentificacion"));
+            pu.getUv().setNombres(resultado.getString("nombres"));
+            pu.getUv().setPrimerApellido(resultado.getString("primerApellido"));
+            lista.add(pu);
         }
         return lista;
     }
@@ -125,10 +136,11 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
         ProyectoUsuarioDTO pu = vo;
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call usuarioProyecto(?,?,?,?)}");
+        CallableStatement procedure = this.cnn.prepareCall("{ call usuarioProyecto(?,?,?,?,?)}");
         int i = 1;
         procedure.setInt(i++, pu.getUv().getIdUsuario());
         procedure.setInt(i++, pu.getPv().getIdProyecto());
+        procedure.setInt(i++, pu.getFv().getIdFichas());
         procedure.setDate(i++, new Date(pu.getPv().getFechaFin().getTime()));
         procedure.setDate(i++, new Date(pu.getPv().getFechaFin().getTime()));
         procedure.execute();
@@ -136,11 +148,11 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     }
 
-    public ProyectoUsuarioDTO UsuarioEliminar(ProyectoUsuarioDTO vo) throws SQLException {
+    public ProyectoUsuarioDTO eliminarUsuarioProyecto(ProyectoUsuarioDTO vo) throws SQLException {
 
         ProyectoUsuarioDTO pu = vo;
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call usuarioEliminar(?,?)}");
+        CallableStatement procedure = this.cnn.prepareCall("{ call eliminarUsuarioProyecto(?,?)}");
         int i = 1;
         procedure.setInt(i++, pu.getUv().getIdUsuario());
         procedure.setInt(i++, pu.getPv().getIdProyecto());

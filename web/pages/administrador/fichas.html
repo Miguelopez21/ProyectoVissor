@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -39,21 +38,23 @@
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                        <li class="active">
-                            <a href="index.jsp">
+
+                        <li>
+                            <a href="index.html">
                                 <i class="material-icons">dashboard</i>
                                 <p>Menu</p>
                             </a>     
                         </li>
 
                         <li>
-                            <a href="gestionProyectos.jsp">
+                            <a href="gestionProyectos.html">
                                 <i class="material-icons">account_balance_wallet</i>
                                 <p>Gestion de Proyectos</p>
-                            </a>  
+                            </a> 
+
                             <ul class="nav">
                                 <li>
-                                    <a href="proyectos.jsp">
+                                    <a href="proyectos.html">
                                         <i class="material-icons">assignment_late</i></i>
                                         <p>Proyectos</p>
                                     </a>
@@ -62,7 +63,7 @@
 
                             <ul class="nav">
                                 <li>
-                                    <a href="reunion.jsp">
+                                    <a href="reunion.html">
                                         <i class="material-icons">supervisor_account</i>
                                         <p>Reuniones</p>
                                     </a>
@@ -71,38 +72,42 @@
 
                             <ul class="nav">
                                 <li>
-                                    <a href="sustentaciones.jsp">
+                                    <a href="sustentaciones.html">
                                         <i class="material-icons">content_paste</i>
                                         <p>Sustentaciones</p>
                                     </a>
                                 </li>
                             </ul>
 
-                        </li>
+                        </li>   
 
-                        <li>
-                            <a href="#">
-                                <i class="material-icons">assignmentreturned</i>
-                                <p>Gestion de Fichas</p>
-                            </a>
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="gestionFichas.html">
+                                    <i class="material-icons">assignmentreturned</i>
+                                    <p>Gestion de Fichas</p>
+                                </a>
+                            </li>
                             <ul class="nav">
-                                <li>
-                                    <a href="#">
+                                <li class="active">
+                                    <a href="fichas.html">
                                         <i class="material-icons">recent_actors</i>
                                         <p>Administrar Fichas</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+
+                        </ul>
 
                         <li>
-                            <a href="#">
+                            <a href="gestionUsuarios.html">
                                 <i class="material-icons">people</i>
                                 <p>Gestion de usuarios</p>
                             </a>
+
                             <ul class="nav">
                                 <li>
-                                    <a href="#">
+                                    <a href="funcionarios.html">
                                         <i class="material-icons">recent_actors</i>
                                         <p>Administrar Instructores</p>
                                     </a>
@@ -111,7 +116,7 @@
 
                             <ul class="nav">
                                 <li>
-                                    <a href="#">
+                                    <a href="aprendices.html">
                                         <i class="material-icons">group</i>
                                         <p>Administrar Aprendices</p>
                                     </a>
@@ -139,12 +144,12 @@
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="perfil.html" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="material-icons">person</i>
                                         <p class="hidden-lg hidden-md">Perfil</p>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Perfil</a></li>
+                                        <li><a href="perfil.html">Perfil</a></li>
                                         <li><a href="#">Cerrar Sesion</a></li>
                                     </ul>
                                 </li>
@@ -154,31 +159,31 @@
                 </nav>
             </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        <div class="container-fluid">
-            <p class="copyright pull-right">
-                &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
-            </p>
-        </div>
-    </footer>
+        <!--Contenido pagina -->
 
-</body>
+        <footer class="footer">
+            <div class="container-fluid">
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena Vissor</a>, Centro de gestion de mercados, Logistica y tics.
+                </p>
+            </div>
+        </footer>
 
-<!--   Core JS Files   -->
-<script src="../../resources/jquery-ui/external/jquery/jquery.js" type="text/javascript"></script>
-<script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../../resources/js/material.min.js" type="text/javascript"></script>
+    </body>
 
-<!--  Charts Plugin -->
-<script src="../../resources/js/chartist.min.js" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script src="../../resources/jquery-ui/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="../../resources/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../resources/js/material.min.js" type="text/javascript"></script>
 
-<!--  Notifications Plugin    -->
-<script src="../../resources/js/bootstrap-notify.js" type="text/javascript"></script>
+    <!--  Charts Plugin -->
+    <script src="../../resources/js/chartist.min.js" type="text/javascript"></script>
 
-<!-- Material Dashboard javascript methods -->
-<script src="../../resources/js/material-dashboard.js" type="text/javascript"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../../resources/js/bootstrap-notify.js" type="text/javascript"></script>
+
+    <!-- Material Dashboard javascript methods -->
+    <script src="../../resources/js/material-dashboard.js" type="text/javascript"></script>
 
 </html>
-

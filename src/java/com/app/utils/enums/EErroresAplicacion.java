@@ -11,21 +11,36 @@ public enum EErroresAplicacion {
     ERROR_DATOS_INCOMPLETOS(201, "Error Faltan Datos"),
     ERROR_DATOS_FECHA_ERRORENA(202, "Error Faltan Datos"),
     ERROR_DATOS_TIPO(203, "Error en los tipos de Datos"),
-    ERROR_DATOS_DUPLICADOS(204, "Error Datos Duplicados"),;
+    ERROR_DATOS_DUPLICADOS(204, "Error Datos Duplicados"),
+    INSERTO(1, "Inserto exitosamente los datos"),
+    CONSULTO(1, "Su consulta a sido un exito"),
+    ELIMINO(1, "Sus datos se eliminaron correctamente"),
+    MODIFICAR(1, "Sus datos fueron modificados correctamente"),
+    EXITO(1, "Su operacion fue un exito"),
+    VALIDACION(0, "Usuario o Contraseña invalidos"),;
 
-    private final int codigo;
-    private final String mensaje;
+    private int codigo;
+    private String Mensajes;
 
-    private EErroresAplicacion(int codigo, String mensaje) {
+    private EErroresAplicacion(int codigo, String mensajes) {
         this.codigo = codigo;
-        this.mensaje = mensaje;
+        this.Mensajes = mensajes;
+
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getMensajes() {
+        return Mensajes;
+    }
+
+    public void setMensajes(String Mensajes) {
+        this.Mensajes = Mensajes;
     }
 }

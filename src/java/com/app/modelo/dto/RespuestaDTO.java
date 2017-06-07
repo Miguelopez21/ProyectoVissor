@@ -1,22 +1,20 @@
-package com.app.utils.exceptions;
+package com.app.modelo.dto;
 
 import com.app.utils.enums.EErroresAplicacion;
 
-public class ProyectoException extends Exception {
+public class RespuestaDTO {
 
     private int codigo;
     private String mensaje;
     private Object datos;
 
-    public ProyectoException(EErroresAplicacion mensaje) {
-        this.codigo = mensaje.getCodigo();
-        this.mensaje = mensaje.getMensajes();
+    public RespuestaDTO() {
+
     }
 
-    public ProyectoException(EErroresAplicacion mensaje, Object datos) {
+    public RespuestaDTO(EErroresAplicacion mensaje) {
         this.codigo = mensaje.getCodigo();
         this.mensaje = mensaje.getMensajes();
-        this.datos = datos;
     }
 
     public int getCodigo() {

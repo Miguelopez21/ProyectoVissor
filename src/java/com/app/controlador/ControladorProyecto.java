@@ -73,17 +73,17 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
         }
     }
 
-    public List<ProyectoVO> ListarProyecto(ProyectoVO vo) throws ProyectoException {
+    public List<ProyectoUsuarioDTO> ListarProyecto(ProyectoUsuarioDTO vo) throws ProyectoException {
         try {
-            return dao.ListarProyecto(vo.getIdProyecto());
+            return dao.ListarProyecto(vo.getPv().getIdProyecto(), vo.getFv().getIdFichas());
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
     }
 
-    public List<ProyectoVO> ListarProyectos(ProyectoVO vo) throws ProyectoException {
+    public List<ProyectoUsuarioDTO> listarProyectoCreado(ProyectoUsuarioDTO vo) throws ProyectoException {
         try {
-            return dao.ListarProyectos(vo.getIdFichas());
+            return dao.listarProyectoCreado(vo.getPv().getIdProyecto());
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
@@ -95,15 +95,15 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
             ProyectoUsuarioDTO usuarioProyecto = dao.UsuarioProyecto(vo);
             return usuarioProyecto;
         } catch (SQLException e) {
-            ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
+            ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_INSERTAR, e);
             throw prex;
         }
     }
 
-    public ProyectoUsuarioDTO UsuarioEliminar(ProyectoUsuarioDTO vo) throws ProyectoException {
+    public ProyectoUsuarioDTO eliminarUsuarioProyecto(ProyectoUsuarioDTO vo) throws ProyectoException {
 
         try {
-            ProyectoUsuarioDTO usuarioEliminar = dao.UsuarioEliminar(vo);
+            ProyectoUsuarioDTO usuarioEliminar = dao.eliminarUsuarioProyecto(vo);
             return usuarioEliminar;
         } catch (SQLException e) {
             ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);

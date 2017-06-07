@@ -1,14 +1,17 @@
 package com.app.servlets;
 
+import com.app.controlador.ControladorFichas;
 import com.app.controlador.ControladorProyecto;
+import com.app.controlador.ControladorUsuarios;
 import com.app.modelo.conexion.ConexionBD;
+import com.app.modelo.dto.FichasProgramaDTO;
 import com.app.modelo.dto.ProyectoUsuarioDTO;
+import com.app.modelo.dto.RespuestaDTO;
+import com.app.utils.exceptions.ProyectoException;
 import com.app.modelo.vo.FichasVO;
 import com.app.modelo.vo.ProyectoVO;
 import com.app.modelo.vo.UsuarioVO;
-import com.app.controlador.ControladorFichas;
-import com.app.modelo.dto.FichasProgramaDTO;
-import com.app.utils.exceptions.ProyectoException;
+import com.app.utils.enums.EErroresAplicacion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +21,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -39,40 +43,88 @@ public class ServletProyecto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      * @throws java.text.ParseException
+     * @throws javax.naming.NamingException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
 
-            int opcion = Integer.parseInt(request.getParameter("option"));
+            String casos = "";
+            Properties caso = null;
+            int opcion = 0;
+            if (request.getParameter("datos") != null) {
+                casos = request.getParameter("datos");
+                caso = new Gson().fromJson(casos, Properties.class);
+                opcion = Integer.parseInt(caso.getProperty("option"));
+            } else {
+                opcion = Integer.parseInt(request.getParameter("option"));
+            }
 
             switch (opcion) {
-                
+
                 case 1:
-
-                    String obtener = request.getParameter("obtener");
-                    FichasProgramaDTO fp = new FichasProgramaDTO();
-                    fp.setFv(new FichasVO());
-                    fp.getFv().setNumero(obtener);
-
+                    String respuestaServlet = "";
+                    RespuestaDTO respuesta = new RespuestaDTO();
                     try {
-                        Connection cnn = ConexionBD.getConexionBD();
-                        ControladorFichas control = new ControladorFichas(cnn);
-                        List<FichasProgramaDTO> lista = control.FiltrarFichas(fp);
-                        ConexionBD.desconectarBD(cnn);
-                        String jSonlista = new Gson().toJson(lista);
-                        out.print(jSonlista);
-                    } catch (ProyectoException prex) {
-                        System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
-                    } catch (NamingException | SQLException ex) {
-                        System.out.println("Error BD" + ex.getMessage());
+                        FichasProgramaDTO vo = new FichasProgramaDTO();
+                        ControladorFichas fichas = new ControladorFichas(ConexionBD.getConexionBD());
+                        List<FichasProgramaDTO> lista = fichas.ListarFichas(vo);
+
+                        if (lista == null) {
+                            respuesta.setCodigo(EErroresAplicacion.CONSULTO.getCodigo());
+                            respuesta.setMensaje(EErroresAplicacion.CONSULTO.getMensajes());
+                            respuestaServlet = new Gson().toJson(respuesta);
+                        } else {
+                            respuesta.setCodigo(EErroresAplicacion.EXITO.getCodigo());
+                            respuesta.setMensaje(EErroresAplicacion.EXITO.getMensajes());
+                            respuesta.setDatos(lista);
+                            respuestaServlet = new Gson().toJson(respuesta);
+                        }
+
+                    } catch (SQLException | ProyectoException ex) {
+                        respuesta.setCodigo(EErroresAplicacion.ERROR_CONEXION_BD.getCodigo());
+                        respuesta.setMensaje(EErroresAplicacion.ERROR_CONEXION_BD.getMensajes());
+                        respuestaServlet = new Gson().toJson(respuesta);
                     }
+                    out.println(respuestaServlet);
+
                     break;
 
                 case 2:
                     
+                    String respuestaAprendiz = "";
+                    RespuestaDTO resAprend = new RespuestaDTO();
+                    try {
+                        UsuarioVO vo = new UsuarioVO();
+                        ControladorUsuarios aprendiz = new ControladorUsuarios(ConexionBD.getConexionBD());
+                        List<UsuarioVO> lista = aprendiz.listarAprendices(vo);
+
+                        if (lista == null) {
+                            resAprend.setCodigo(EErroresAplicacion.CONSULTO.getCodigo());
+                            resAprend.setMensaje(EErroresAplicacion.CONSULTO.getMensajes());
+                            respuestaServlet = new Gson().toJson(resAprend);
+                        } else {
+                            resAprend.setCodigo(EErroresAplicacion.EXITO.getCodigo());
+                            resAprend.setMensaje(EErroresAplicacion.EXITO.getMensajes());
+                            resAprend.setDatos(lista);
+                            respuestaServlet = new Gson().toJson(resAprend);
+                        }
+
+                    } catch (SQLException | ProyectoException ex) {
+                        resAprend.setCodigo(EErroresAplicacion.ERROR_CONEXION_BD.getCodigo());
+                        resAprend.setMensaje(EErroresAplicacion.ERROR_CONEXION_BD.getMensajes());
+                        respuestaServlet = new Gson().toJson(resAprend);
+                    }
+                    out.println(respuestaAprendiz);
+
+                    
+                    break;
+                    
+                    
+                case 3:
+
                     int idFicha = Integer.parseInt(request.getParameter("idFicha"));
                     int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                     String nombreProyecto = request.getParameter("nombre");
@@ -86,8 +138,9 @@ public class ServletProyecto extends HttpServlet {
 
                     ProyectoVO vo = new ProyectoVO();
                     ProyectoUsuarioDTO vt = new ProyectoUsuarioDTO();
-                    vo.setIdFichas(idFicha);
                     vt.setUv(new UsuarioVO());
+                    vt.setFv(new FichasVO());
+                    vt.getFv().setIdFichas(idFicha);
                     vt.getUv().setIdUsuario(idUsuario);
                     vo.setNombreProyecto(nombreProyecto);
                     vo.setDescripcion(descripcion);
@@ -101,24 +154,14 @@ public class ServletProyecto extends HttpServlet {
                         vt.setPv(idProyecto);
                         control.UsuarioProyecto(vt);
                         ConexionBD.desconectarBD(cnn);
+
                     } catch (ProyectoException prex) {
-                        System.out.println(prex.getErrorAplicacion().getCodigo() + "> -- <" + prex.getErrorAplicacion().getMensaje());
                     } catch (NamingException | SQLException ex) {
                         System.out.println("Error BD" + ex.getMessage());
-
                     }
                     break;
-            }
 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletProyecto</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletProyecto at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            }
         }
     }
 
@@ -136,7 +179,7 @@ public class ServletProyecto extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ParseException ex) {
+        } catch (ParseException | NamingException ex) {
             Logger.getLogger(ServletProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -154,7 +197,7 @@ public class ServletProyecto extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ParseException ex) {
+        } catch (ParseException | NamingException ex) {
             Logger.getLogger(ServletProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
