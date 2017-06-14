@@ -182,101 +182,44 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Menu Principal</h4>
+                                        <h4 class="title">Proyecto</h4>
                                     </div>
                                     <div class="card-content">
 
                                         <!--Contenido-->
 
                                         <center>
-                                            <form method="post">
 
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header" data-background-color="purple">
-                                                            <h4 class="title">Fichas de Formacion</h4>
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header" data-background-color="purple">
+                                                        <h4 class="title">Proyectos del sistema</h4>
 
-                                                        </div>
-                                                        <div>
-                                                            <div class="card-content table-responsive">
-                                                                <div id="elemento">
-                                                                    <table class="table table-hover " id="tabla">
-                                                                        <thead class="text-primary" >
-                                                                        <th>Programa de Formacion</th>
-                                                                        <th>Ficha</th>
-                                                                        <th>Fecha de Incio</th>
-                                                                        <th>Fecha de Terminacion</th>                                                                    
-                                                                        <th></th>    
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div id="mostrar" style="display: none;">
-                                                    <p id="programa"></p>
-                                                    <p id="Ficha"></p>
-                                                    <p id="Fechainicio"></p>
-                                                    <p id="Fechafin"></p>
-                                                    <button type="button" id="eliminar">Eliminar</button>
-                                                </div>
-
-
-                                                <p>
-                                                    Nombre Proyecto:<input type="text" name="nombre" id="nombre">
-                                                    Descripcion: <input type="text" name="descripcion" id="descripcion"><br><br><br>
-                                                    fecha incio: <input type="text" id="fechainicio">
-                                                    fecha fin: <input type="text" id="fechafin"><br>
-                                                </p>
-
-                                                <br>
-
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header" data-background-color="purple">
-                                                            <h4 class="title">Aprendices en Formacion</h4>
-
-                                                        </div>
+                                                    <div>
                                                         <div class="card-content table-responsive">
-                                                            <table class="table table-hover" id="tablaApre">
-                                                                <thead class="text-primary">
-                                                                <th>Numero de Documento</th>
-                                                                <th>Nombres</th>
-                                                                <th>Primer Apellido</th>
-                                                                <th>Segundo Apellido</th>   
-                                                                <th></th>
-                                                                </thead>
-                                                                <tbody>
+                                                            <div id="elemento">
+                                                                <table class="table table-hover " id="tablapro">
+                                                                    <thead class="text-primary" >
+                                                                    <th>Programa</th>
+                                                                    <th>Ficha</th>
+                                                                    <th>Nombre del Proyecto</th>
+                                                                    <th>Fecha Inicio</th>
+                                                                    <th>Fecha Fin</th>  
+                                                                    <th>Porcentaje</th>  
+                                                                    <th></th>    
+                                                                    </thead>
+                                                                    <tbody>
 
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div id="agregar"></div>
-                                                        <div id="mostrarapre" style="display: none;">
-                                                            <div class="elemento">
-                                                                <p id="numero"></p>
-                                                                <p id="nombres"></p>
-                                                                <p id="primer"></p>
-                                                                <p id="segundo"></p>
-                                                                
-                                                                <input type="hidden" id="aprendiz">
-                                                                <button type="button" id="eliminarap" class="elementobtn">Eliminar</button>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
 
                                                     </div>
                                                 </div>
+                                            </div>
 
-
-                                                <input type="button" name="Crear" id="enviar"  value="Crear Proyecto">
-
-                                            </form>
                                         </center>
 
                                     </div>
@@ -339,6 +282,6 @@
 
     <!-- DataTable -->
     <script src="../../resources/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="../../resources/ajax/filtrosProyecto.js" type="text/javascript"></script>
+    <script src="../../resources/ajax/proyectos.js" type="text/javascript"></script>
 
 </html>

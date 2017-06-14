@@ -18,9 +18,9 @@ public class ControladorUsuarios extends ControladorGenerico<UsuarioDAO, Usuario
     }
 
     public List<UsuarioVO> listarAprendices(UsuarioVO vo) throws ProyectoException, SQLException {
-
+                
         try {
-            return dao.listarAprendices(vo);
+            return dao.listarAprendices();
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }

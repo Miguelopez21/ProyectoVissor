@@ -18,14 +18,13 @@ public class FichasDAO implements IreglasDAO<FichasVO> {
         this.cnn = cnn;
     }
 
-    public List<FichasProgramaDTO> ListarFichas(FichasProgramaDTO vo) throws SQLException {
-
-        FichasProgramaDTO fp = vo;
+    public List<FichasProgramaDTO> ListarFichas() throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call listarFichas ()}");
         ResultSet resultado = procedure.executeQuery();
         List<FichasProgramaDTO> lista = new ArrayList();
         while (resultado.next()) {
+            FichasProgramaDTO fp = new FichasProgramaDTO();
             fp.setPf(new ProgramaFormacionVO());
             fp.setFv(new FichasVO());
             fp.getFv().setIdFichas(resultado.getInt("idFichas"));

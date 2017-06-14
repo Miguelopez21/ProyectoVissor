@@ -7,7 +7,7 @@ public class UsuarioVO implements IreglasVO {
     private int idTipoDocumento;
     private String correoSena;
     private String contraseña;
-    private String numeroIdentificacion;
+    private int numeroIdentificacion;
     private String nombres;
     private String primerApellido;
     private String segundoApellido;
@@ -18,7 +18,7 @@ public class UsuarioVO implements IreglasVO {
     public UsuarioVO() {
     }
 
-    public UsuarioVO(int idUsuario, int idTipoUsuario, int idTipoDocumento, String correoSena, String contraseña, String numeroIdentificacion, String nombres, String primerApellido, String segundoApellido, String direccion, int telefono, boolean estado) {
+    public UsuarioVO(int idUsuario, int idTipoUsuario, int idTipoDocumento, String correoSena, String contraseña, int numeroIdentificacion, String nombres, String primerApellido, String segundoApellido, String direccion, int telefono, boolean estado) {
         this.idUsuario = idUsuario;
         this.idTipoUsuario = idTipoUsuario;
         this.idTipoDocumento = idTipoDocumento;
@@ -73,11 +73,11 @@ public class UsuarioVO implements IreglasVO {
         this.contraseña = contraseña;
     }
 
-    public String getNumeroIdentificacion() {
+    public int getNumeroIdentificacion() {
         return numeroIdentificacion;
     }
 
-    public void setNumeroIdentificacion(String numeroIdentificacion) {
+    public void setNumeroIdentificacion(int numeroIdentificacion) {
         this.numeroIdentificacion = numeroIdentificacion;
     }
 

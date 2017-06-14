@@ -21,16 +21,19 @@ public class UsuarioDAO implements IreglasDAO<UsuarioVO> {
         this.cnn = cnn;
     }
 
-    public List<UsuarioVO> listarAprendices(UsuarioVO vo) throws SQLException {
+    public List<UsuarioVO> listarAprendices() throws SQLException {
 
         CallableStatement procedure = this.cnn.prepareCall("{ call listarAprendices ()}");
         ResultSet resultado = procedure.executeQuery();
         List<UsuarioVO> lista = new ArrayList();
         while (resultado.next()) {
-            vo.setIdUsuario(resultado.getInt("idUsuario"));
-            vo.setNombres(resultado.getString("nombres"));
-            vo.setPrimerApellido(resultado.getString("primerApellido"));
-            lista.add(vo);
+            UsuarioVO us = new UsuarioVO();
+            us.setIdUsuario(resultado.getInt("idUsuario"));
+            us.setNumeroIdentificacion(resultado.getInt("numeroIdentificacion"));
+            us.setNombres(resultado.getString("nombres"));
+            us.setPrimerApellido(resultado.getString("primerApellido"));
+            us.setSegundoApellido(resultado.getString("segundoApellido"));
+            lista.add(us);
         }
         return lista;
     }

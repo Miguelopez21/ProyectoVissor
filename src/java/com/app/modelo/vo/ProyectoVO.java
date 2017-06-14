@@ -5,6 +5,7 @@ import java.util.Date;
 public class ProyectoVO implements IreglasVO {
 
     private int idProyecto;
+    private int idFichas;
     private String nombreProyecto;
     private String descripcion;
     private Date fechaInicio;
@@ -13,10 +14,12 @@ public class ProyectoVO implements IreglasVO {
     private boolean estado;
 
     public ProyectoVO() {
+
     }
 
-    public ProyectoVO(int idProyecto, String nombreProyecto, String descripcion, Date fechaInicio, Date fechaFin, int porcentaje, boolean estado) {
+    public ProyectoVO(int idProyecto, int idFichas, String nombreProyecto, String descripcion, Date fechaInicio, Date fechaFin, int porcentaje, boolean estado) {
         this.idProyecto = idProyecto;
+        this.idFichas = idFichas;
         this.nombreProyecto = nombreProyecto;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
@@ -31,6 +34,14 @@ public class ProyectoVO implements IreglasVO {
 
     public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
+    }
+
+    public int getIdFichas() {
+        return idFichas;
+    }
+
+    public void setIdFichas(int idFichas) {
+        this.idFichas = idFichas;
     }
 
     public String getNombreProyecto() {

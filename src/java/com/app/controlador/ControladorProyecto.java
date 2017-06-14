@@ -75,7 +75,7 @@ public class ControladorProyecto extends ControladorGenerico<ProyectoDAO, Proyec
 
     public List<ProyectoUsuarioDTO> ListarProyecto(ProyectoUsuarioDTO vo) throws ProyectoException {
         try {
-            return dao.ListarProyecto(vo.getPv().getIdProyecto(), vo.getFv().getIdFichas());
+            return dao.ListarProyecto();
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }

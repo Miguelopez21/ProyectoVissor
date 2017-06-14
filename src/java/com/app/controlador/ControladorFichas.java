@@ -21,7 +21,7 @@ public class ControladorFichas extends ControladorGenerico<FichasDAO, FichasVO> 
     public List<FichasProgramaDTO> ListarFichas(FichasProgramaDTO vo) throws ProyectoException {
 
         try {
-            return dao.ListarFichas(vo);
+            return dao.ListarFichas();
         } catch (SQLException e) {
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
