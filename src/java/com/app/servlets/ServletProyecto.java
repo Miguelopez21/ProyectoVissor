@@ -74,7 +74,7 @@ public class ServletProyecto extends HttpServlet {
                 fechafin = caso.getProperty("fechaFin");
 
             } else {
-;                opcion = Integer.parseInt(request.getParameter("option"));
+                opcion = Integer.parseInt(request.getParameter("option"));
             }
 
             switch (opcion) {

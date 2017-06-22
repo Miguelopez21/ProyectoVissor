@@ -33,9 +33,9 @@ $(document).ready(function () {
         var arr = this.id.split("$$");
         fichaSelec = arr[0];
         $("#mostrar").show();
-        $("#programa").text(arr[1]);
-        $("#Ficha").text(arr[2]);
-        $("#Fechainicio").text(arr[3]);
+        $("#programa").text("Programa de Formacion: " + arr[1]);
+        $("#Ficha").text("Ficha: " + arr[2]);
+        $("#Fechainicio").text("Fecha de inicio: " + arr[3]);
         $("#Fechafin").text("Fecha final: " + arr[4]);
     });
 
@@ -76,17 +76,32 @@ $(document).ready(function () {
     var con = 0;
     $(document).on('click', '.filapren', function (e) {
         var arra = this.id.split("$$");
-        arrAprendiz.push(arra[0]);
-        var clon = $("#mostrarapre").clone();
-        clon.find(".elemento").attr("id", "element" + con);
-        clon.find("#aprendiz").attr("value", arra[0]);
-        clon.find("#numero").text(arra[1]);
-        clon.find("#nombres").text(arra[2]);
-        clon.find("#primer").text(arra[3]);
-        clon.find("#segundo").text(arra[4]);
-        clon.find("#eliminarap").val(arra[0] + "@element" + con);
-        clon.children().appendTo("#agregar");
-        con++;
+
+        var valores = $(".validar");
+
+        var aprobado = true;
+
+        $.each(valores, function (indice, item) {
+            if (arra[1] == $(item).val())
+            {
+                aprobado = false;
+            }
+        });
+        if (aprobado)
+        {
+            arrAprendiz.push(arra[0]);
+            var clon = $("#mostrarapre").clone();
+            clon.find(".elemento").attr("id", "element" + con);
+            clon.find("#cedula").attr("value", arra[1]);
+            clon.find("#aprendiz").attr("value", arra[0]);
+            clon.find("#numero").text("Numero: " + arra[1]);
+            clon.find("#nombres").text("Nombres: " + arra[2]);
+            clon.find("#primer").text("Primer Nombre: " + arra[3]);
+            clon.find("#segundo").text("Segungo Apellido: " + arra[4]);
+            clon.find("#eliminarap").val(arra[0] + "@element" + con);
+            clon.children().appendTo("#agregar");
+            con++;
+        }
     });
 
     $(document).on('click', '.elementobtn', function (e) {
@@ -96,18 +111,19 @@ $(document).ready(function () {
         $("#" + value[1] + "").remove();
     });
     $("#eliminarap").click(function () {
-        alert("Se un Aprendiz");
         $("#mostrarapre").hide();
         $("#numero").text();
         $("#nombres").text();
         $("#primer").text();
         $("#segundo").text();
+        alert("Se elimino un Aprendiz");
     });
 
     $("#enviar").click(function () {
 
         console.log(arrAprendiz);
         console.log(fichaSelec);
+
         var json = {
             option: 3,
             nombre: $("#nombre").val(),
@@ -115,7 +131,7 @@ $(document).ready(function () {
             fechaInicio: $("#fechainicio").val(),
             fechaFin: $("#fechafin").val(),
             fichas: fichaSelec,
-            aprendices: ""+arrAprendiz+""
+            aprendices: "" + arrAprendiz + ""
         };
         $.ajax({
             url: "../../Proyecto",
@@ -125,6 +141,9 @@ $(document).ready(function () {
             cache: false,
             success: function (result) {
 
+                alert("El proyecto fue creado Correctamente");
+               $(location).attr('href','http://localhost:8080/ProyectoSena/pages/administrador/modificarProyecto.html');
+                
             },
             error: function () {
                 alert("Error al Insertar Proyecto");

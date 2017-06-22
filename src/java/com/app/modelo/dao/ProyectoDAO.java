@@ -87,12 +87,11 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     public List<ProyectoUsuarioDTO> ListarProyecto() throws SQLException {
 
-        ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
-
-        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyecto ()}");
+        CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectos ()}");
         ResultSet resultado = procedure.executeQuery();
         List<ProyectoUsuarioDTO> lista = new ArrayList();
         while (resultado.next()) {
+            ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
             pu.setPv(new ProyectoVO());
             pu.setPf(new ProgramaFormacionVO());
             pu.setFv(new FichasVO());
@@ -100,7 +99,8 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
             pu.getPf().setPrograma(resultado.getString("programa"));
             pu.getFv().setNumero(resultado.getString("numero"));
             pu.getPv().setNombreProyecto(resultado.getString("nombreProyecto"));
-            pu.getPv().setFechaInicio(resultado.getDate("fechaInicio"));
+            pu.getPv().setDescripcion(resultado.getString("descripcion"));
+            pu.getPv().setFechaInicio(resultado.getDate("fechaIncio"));
             pu.getPv().setFechaFin(resultado.getDate("fechaFin"));
             pu.getPv().setPorcentaje(resultado.getInt("porcentaje"));
             lista.add(pu);
@@ -110,27 +110,20 @@ public class ProyectoDAO implements IreglasDAO<ProyectoVO> {
 
     public List<ProyectoUsuarioDTO> listarProyectoCreado(int idProyecto) throws SQLException {
 
-        ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
-
         CallableStatement procedure = this.cnn.prepareCall("{ call listarProyectoCreado (?)}");
         int i = 1;
         procedure.setInt(i++, idProyecto);
         ResultSet resultado = procedure.executeQuery();
         List<ProyectoUsuarioDTO> lista = new ArrayList();
         while (resultado.next()) {
+            ProyectoUsuarioDTO pu = new ProyectoUsuarioDTO();
             pu.setPv(new ProyectoVO());
             pu.setUv(new UsuarioVO());
-            pu.getPv().setIdProyecto(resultado.getInt("idProyecto"));
-            pu.getPv().setNombreProyecto(resultado.getString("nombreProyecto"));
-            pu.getPv().setDescripcion(resultado.getString("descripcion"));
-            pu.getPv().setFechaInicio(resultado.getDate("fechaInicio"));
-            pu.getPv().setFechaFin(resultado.getDate("fechaFin"));
-            pu.getPv().setPorcentaje(resultado.getInt("porcentaje"));
-            pu.getPv().setEstado(resultado.getBoolean("estado"));
             pu.getUv().setIdUsuario(resultado.getInt("idUsuario"));
             pu.getUv().setNumeroIdentificacion(resultado.getInt("numeroIdentificacion"));
             pu.getUv().setNombres(resultado.getString("nombres"));
             pu.getUv().setPrimerApellido(resultado.getString("primerApellido"));
+            pu.getUv().setSegundoApellido(resultado.getString("segundoApellido"));
             lista.add(pu);
         }
         return lista;
