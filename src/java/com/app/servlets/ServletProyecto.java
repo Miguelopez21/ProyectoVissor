@@ -57,6 +57,7 @@ public class ServletProyecto extends HttpServlet {
             int opcion = 0;
             int idFicha = 0;
             int idUsuario = 0;
+            int idProyecto = 0;
             String nombreProyecto = "";
             String descripcion = "";
             String fechaInicio = "";
@@ -72,13 +73,14 @@ public class ServletProyecto extends HttpServlet {
                 descripcion = caso.getProperty("descripcion");
                 fechaInicio = caso.getProperty("fechaInicio");
                 fechafin = caso.getProperty("fechaFin");
-
+                idProyecto = Integer.parseInt(caso.getProperty("IdProyecto"));
             } else {
                 opcion = Integer.parseInt(request.getParameter("option"));
             }
 
             switch (opcion) {
 
+                //Listar Fichas
                 case 1:
                     String respuestaServlet = "";
                     RespuestaDTO respuesta = new RespuestaDTO();
@@ -112,6 +114,7 @@ public class ServletProyecto extends HttpServlet {
 
                 case 2:
 
+                    //Listar Aprendices
                     RespuestaDTO resAprend = new RespuestaDTO();
                     try {
                         UsuarioVO vo = new UsuarioVO();
@@ -143,6 +146,7 @@ public class ServletProyecto extends HttpServlet {
 
                 case 3:
 
+                    //Insertar Proyectos
                     RespuestaDTO resinset = new RespuestaDTO();
 
                     idFicha = Integer.parseInt(request.getParameter("fichas").split(";")[0]);
@@ -178,7 +182,6 @@ public class ServletProyecto extends HttpServlet {
                             vo.setIdProyecto(result.getIdProyecto());
                             vo.setFechaInicio(result.getFechaInicio());
                             vo.setFechaFin(result.getFechaFin());
- 
 
                             String[] arrayAprendices = aprendices.split(",");
 
@@ -217,14 +220,119 @@ public class ServletProyecto extends HttpServlet {
                     }
 
                     out.println(respuestaServlet);
-
                     break;
 
+                case 4:
+
+                    //Eliminar Aprendices Proyecto
+                    RespuestaDTO resAprendos = new RespuestaDTO();
+
+                    idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+
+                    if (idUsuario == 0 || idProyecto == 0) {
+                        resAprendos.setCodigo(EErroresAplicacion.ERROR_DATOS_INCOMPLETOS.getCodigo());
+                        resAprendos.setMensaje(EErroresAplicacion.ERROR_DATOS_INCOMPLETOS.getMensajes());
+                        respuestaServlet = new Gson().toJson(resAprendos);
+                    } else {
+                        RespuestaDTO reinset = new RespuestaDTO();
+                        try {
+                            ProyectoVO vo = new ProyectoVO();
+                            UsuarioVO uv = new UsuarioVO();
+                            vo.setIdProyecto(idProyecto);
+                            uv.setIdUsuario(idUsuario);
+                            ProyectoUsuarioDTO usu = new ProyectoUsuarioDTO();
+                            usu.setPv(vo);
+                            usu.setUv(uv);
+                            Connection cnn = ConexionBD.getConexionBD();
+                            ControladorProyecto controProyecto = new ControladorProyecto(cnn);
+                            ProyectoUsuarioDTO result = controProyecto.eliminarUsuarioProyecto(usu);
+                            ConexionBD.desconectarBD(cnn);
+
+                            if (usu == null) {
+
+                                reinset.setCodigo(EErroresAplicacion.EXITO.getCodigo());
+                                reinset.setMensaje(EErroresAplicacion.EXITO.getMensajes());
+                                respuestaServlet = new Gson().toJson(reinset);
+
+                            } else {
+
+                                reinset.setCodigo(EErroresAplicacion.EXITO.getCodigo());
+                                reinset.setMensaje(EErroresAplicacion.EXITO.getMensajes());
+                                reinset.setDatos(vo);
+                                respuestaServlet = new Gson().toJson(reinset);
+                            }
+
+                        } catch (ProyectoException | SQLException | NamingException e) {
+                            reinset.setCodigo(EErroresAplicacion.ERROR_CONEXION_BD.getCodigo());
+                            reinset.setMensaje(EErroresAplicacion.ERROR_CONEXION_BD.getMensajes());
+                            respuestaServlet = new Gson().toJson(reinset);
+                        }
+
+                    }
+                    out.println(respuestaServlet);
+                    break;
+
+                case 5:
+
+                    //Agregar Aprendiz Proyecto
+                    RespuestaDTO resAprendoj = new RespuestaDTO();
+
+                    idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
+                    fechaInicio = request.getParameter("fechaInicio");
+                    SimpleDateFormat formatot = new SimpleDateFormat("mm/dd/yyyy");
+                    Date fechas = new Date(formatot.parse(fechaInicio).getTime());
+                    fechafin = request.getParameter("fechaFin");
+                    SimpleDateFormat formatost = new SimpleDateFormat("mm/dd/yyyy");
+                    Date fechas1 = new Date(formatost.parse(fechafin).getTime());
+
+                    if (idUsuario == 0 || idProyecto == 0) {
+                        resAprendoj.setCodigo(EErroresAplicacion.ERROR_DATOS_INCOMPLETOS.getCodigo());
+                        resAprendoj.setMensaje(EErroresAplicacion.ERROR_DATOS_INCOMPLETOS.getMensajes());
+                        respuestaServlet = new Gson().toJson(resAprendoj);
+                    } else {
+                        RespuestaDTO reinset = new RespuestaDTO();
+                        try {
+                            ProyectoVO vo = new ProyectoVO();
+                            UsuarioVO uv = new UsuarioVO();
+                            vo.setIdProyecto(idProyecto);
+                            uv.setIdUsuario(idUsuario);
+                            vo.setFechaInicio(fechas);
+                            vo.setFechaFin(fechas1);
+                            ProyectoUsuarioDTO usu = new ProyectoUsuarioDTO();
+                            usu.setPv(vo);
+                            usu.setUv(uv);
+                            Connection cnn = ConexionBD.getConexionBD();
+                            ControladorProyecto controProyecto = new ControladorProyecto(cnn);
+                            ProyectoUsuarioDTO result = controProyecto.UsuarioProyecto(usu);
+                            ConexionBD.desconectarBD(cnn);
+
+                            if (usu == null) {
+                                reinset.setCodigo(EErroresAplicacion.ERROR_CONSULTAR.getCodigo());
+                                reinset.setMensaje(EErroresAplicacion.ERROR_CONSULTAR.getMensajes());
+                                respuestaServlet = new Gson().toJson(reinset);
+                            } else {
+                                reinset.setCodigo(EErroresAplicacion.EXITO.getCodigo());
+                                reinset.setMensaje(EErroresAplicacion.EXITO.getMensajes());
+                                reinset.setDatos(usu);
+                                respuestaServlet = new Gson().toJson(reinset);
+                            }
+
+                        } catch (ProyectoException | SQLException | NamingException e) {
+                            reinset.setCodigo(EErroresAplicacion.ERROR_CONEXION_BD.getCodigo());
+                            reinset.setMensaje(EErroresAplicacion.ERROR_CONEXION_BD.getMensajes());
+                            respuestaServlet = new Gson().toJson(reinset);
+                        }
+                    }
+                    out.println(respuestaServlet);
+                    break;
             }
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -239,7 +347,8 @@ public class ServletProyecto extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException | NamingException | SQLException | ProyectoException ex) {
-            Logger.getLogger(ServletProyecto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletProyecto.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -256,8 +365,10 @@ public class ServletProyecto extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (ParseException | NamingException | SQLException | ProyectoException ex) {
-            Logger.getLogger(ServletProyecto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletProyecto.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }

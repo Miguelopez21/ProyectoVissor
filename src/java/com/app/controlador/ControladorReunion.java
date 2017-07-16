@@ -99,5 +99,24 @@ public class ControladorReunion extends ControladorGenerico<ReunionDAO, ReunionV
             throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
         }
     }
+    
+     public List<ReunionDTO> listarAsistentes(ReunionDTO vo) throws ProyectoException {
+        try {
+            return dao.listarAsistentes(vo.getRv().getIdReunion());
+        } catch (SQLException e) {
+            throw new ProyectoException(EErroresAplicacion.ERROR_CONSULTAR, e);
+        }
+    }
+    
+       public ReunionDTO ModificarReunion(ReunionDTO vo) throws ProyectoException {
+
+        try {
+            ReunionDTO ModificarReunion = dao.ModificarReunion(vo);
+            return ModificarReunion;
+        } catch (SQLException e) {
+            ProyectoException prex = new ProyectoException(EErroresAplicacion.ERROR_MODIFICAR, e);
+            throw prex;
+        }
+    }
 
 }

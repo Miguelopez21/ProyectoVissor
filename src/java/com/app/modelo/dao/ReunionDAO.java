@@ -1,6 +1,7 @@
 package com.app.modelo.dao;
 
 import com.app.modelo.dto.ReunionDTO;
+import com.app.modelo.vo.AsistenciaVO;
 import com.app.modelo.vo.CompromisoVO;
 import com.app.modelo.vo.ReunionVO;
 import java.sql.CallableStatement;
@@ -32,7 +33,12 @@ public class ReunionDAO implements IreglasDAO<ReunionVO> {
         procedure.setString(6, rd.getRv().getAmbiente());
         procedure.setDate(7, (Date) rd.getRv().getFechaIncio());
         procedure.setDate(8, (Date) rd.getRv().getFechaIncio());
-        procedure.execute();
+        ResultSet resultado = procedure.executeQuery();
+        if (resultado.next()) {
+            rd.setRv(new ReunionVO());
+            rd.getRv().setIdReunion(resultado.getInt("idReunion"));
+        }
+
         return vo;
 
     }
@@ -79,9 +85,8 @@ public class ReunionDAO implements IreglasDAO<ReunionVO> {
 
         ReunionDTO rd = new ReunionDTO();
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call eliminarAsistencia (?,?)}");
+        CallableStatement procedure = this.cnn.prepareCall("{ call eliminarAsistencia (?)}");
         procedure.setInt(1, rd.getAv().getIdAsistencia());
-        procedure.setInt(2, rd.getAv().getIdReunion());
         procedure.execute();
         return vo;
     }
@@ -114,13 +119,12 @@ public class ReunionDAO implements IreglasDAO<ReunionVO> {
         }
         return lista;
     }
-    
-        public List<ReunionDTO> listarReunionCreada() throws SQLException {
+
+    public List<ReunionDTO> listarReunionCreada() throws SQLException {
 
         ReunionDTO rd = new ReunionDTO();
 
-        CallableStatement procedure = this.cnn.prepareCall("{ call listarReunionCreada (?)}");
-        procedure.setInt(1, rd.getRv().getIdProyecto());
+        CallableStatement procedure = this.cnn.prepareCall("{ call listarReunionCreada ()}");
         ResultSet resultado = procedure.executeQuery();
         List<ReunionDTO> lista = new ArrayList();
         while (resultado.next()) {
@@ -136,6 +140,41 @@ public class ReunionDAO implements IreglasDAO<ReunionVO> {
         return lista;
     }
 
+    public ReunionDTO ModificarReunion(ReunionDTO vo) throws SQLException {
+
+        ReunionDTO pu = vo;
+        
+        CallableStatement procedure = this.cnn.prepareCall("{ call modificarReunion(?,?,?,?,?,?)}");
+        int i = 1;
+        procedure.setString(i++, pu.getRv().getNombre());
+        procedure.setString(i++, pu.getRv().getLugar());
+        procedure.setString(i++, pu.getRv().getAmbiente());
+        procedure.setDate(i++, new Date(pu.getRv().getFechaIncio().getTime()));
+        procedure.setDate(i++, new Date(pu.getRv().getFechaFin().getTime()));
+        procedure.setInt(i++, pu.getRv().getIdReunion());
+        procedure.execute();
+        return vo;
+    }
+    
+      public List<ReunionDTO> listarAsistentes(int idAsistentes) throws SQLException {
+
+        ReunionDTO rd = new ReunionDTO();
+        
+        CallableStatement procedure = this.cnn.prepareCall("{ call listarAsistentes (?)}");
+        procedure.setInt(1, idAsistentes);
+        ResultSet resultado = procedure.executeQuery();
+        List<ReunionDTO> lista = new ArrayList();
+        while (resultado.next()) {
+            rd.setAv(new AsistenciaVO());
+            rd.getAv().setIdAsistencia(resultado.getInt("idAsistencia"));
+            rd.getAv().setAsistentes(resultado.getString("asistentes"));
+            rd.getAv().setEstado(resultado.getBoolean("estado"));
+            lista.add(rd);
+        }
+        return lista;
+    }
+    
+    
     @Override
     public void Insertar(ReunionVO vo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
