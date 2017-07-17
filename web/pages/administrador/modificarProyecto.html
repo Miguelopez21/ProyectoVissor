@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/png" href="../../resources/img/favicon.png" alt="" />
@@ -215,7 +214,7 @@
 
                                                                     </tbody>
                                                                 </table>
-                                                                <div id="modificar">
+                                                                <div id="modificar" style="display:none;">
                                                                     <label>Nombre del proyecto</label>
                                                                     <input id="nombreProyecto">
                                                                     <label>Descripcion del proyecto</label>
@@ -226,7 +225,9 @@
                                                                     <input id="fechaFinProyecto">
                                                                     <label>porcentaje proyecto</label>
                                                                     <input id="porcentajeProyecto">
-
+                                                                    <div>
+                                                                        <button id="btnModificarP" class="btn btn-info"> Modificar</button>
+                                                                    </div>
                                                                     <table class="table table-hover " id="tabapren">
                                                                         <thead class="text-primary" >
                                                                         <th>Numero de identificacion</th>
@@ -239,10 +240,32 @@
 
                                                                         </tbody>
                                                                     </table>
+                                                                    <div>
+                                                                        <button id="btnModificarProyectoA" class="btn btn-info"> Agregar aprendiz</button>                                                                        
+                                                                    </div>
                                                                 </div>
+                                                            </div>
 
+                                                            <div id="agregarAprendiz" style="display:none;">
 
+                                                                <div class="card-content table-responsive">
+                                                                    <table class="table table-hover" id="tablaApre">
+                                                                        <thead class="text-primary">
+                                                                        <th>Numero de Documento</th>
+                                                                        <th>Nombres</th>
+                                                                        <th>Primer Apellido</th>
+                                                                        <th>Segundo Apellido</th>   
+                                                                        <th></th>
+                                                                        </thead>
+                                                                        <tbody>
 
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div id="agregar"></div>
+                                                                    <div>
+                                                                        <button id="btnModiproyectoAgregar" class="btn btn-info"> Agregar aprendiz</button>                                                                        
+                                                                    </div>
                                                             </div>
                                                         </div>
 

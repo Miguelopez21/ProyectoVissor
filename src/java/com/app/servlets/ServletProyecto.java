@@ -225,7 +225,7 @@ public class ServletProyecto extends HttpServlet {
                 case 4:
 
                     //Eliminar Aprendices Proyecto
-                    RespuestaDTO resAprendos = new RespuestaDTO();
+                        RespuestaDTO resAprendos = new RespuestaDTO();
 
                     idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                     idProyecto = Integer.parseInt(request.getParameter("idProyecto"));
